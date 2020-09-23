@@ -18,6 +18,7 @@
                 ref="plane_image"
                 class="plane"
                 :src="getImage(currentPlane.direction)"
+                v-show="show"
             />
         </div>
     </div>
@@ -102,7 +103,7 @@ export default {
             console.log({ initialPosition, finalPosition });
             timeline.set(planeObject, initialPosition);
             timeline.to(planeObject, {
-                duration: 7.5,
+                duration: 10,
                 x: finalPosition.x,
                 ease: Linear.easeNone,
             });
@@ -117,16 +118,16 @@ export default {
         this.player.src = this.current.src;
         this.direction = "left_to_right";
         this.counter = 0;
-        console.log(this.currentPlane);
     },
     mounted() {
         var self = this;
         this.$nextTick(function () {
             window.setInterval(() => {
+                self.show = true;
                 self.currentPlane.direction = self.directions[self.counter % 2];
                 self.counter += 1;
                 self.animatePlane(self.currentPlane.direction);
-            }, 10000);
+            }, randomInteger(11000, 15000));
         });
     },
 };
@@ -220,12 +221,6 @@ button:hover {
     background-color: #cc2e5d;
 }
 .plane {
-    /* backface-visibility: hidden; */
     position: relative;
-    /* right: 100%; */
-    /* left: 0%; */
-    /* left: 100%; */
-    /* right: -500px; */
-    /* visibility: hidden; */
 }
 </style>
