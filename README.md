@@ -9,7 +9,8 @@ Based on Vue.js, and GSAP.
 To use this repo, first you have to install `npm`. For Ubuntu you can simply type:
 
 ```
-sudo apt-get install npm
+sudo apt update
+sudo apt install nodejs npm
 ```
 
 After that, you have to install `vue-cli` via:
