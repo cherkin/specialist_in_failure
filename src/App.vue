@@ -26,7 +26,6 @@
 
 <script>
 import gsap from "gsap";
-import Linear from "gsap";
 
 function randomInteger(min, max) {
     return Math.round(Math.random() * (max - min) + min);
@@ -44,7 +43,7 @@ function getDirectionCooredinates(window, direction) {
         finalPosition.x = -offset;
         initialPosition.x = window.clientWidth;
     }
-    finalPosition.y = randomInteger(40, window.clientHeight - 60);
+    initialPosition.y = randomInteger(40, window.clientHeight - 60);
     return { initialPosition, finalPosition };
 }
 
@@ -105,8 +104,8 @@ export default {
             timeline.to(planeObject, {
                 duration: 10,
                 x: finalPosition.x,
-                ease: Linear.easeNone,
             });
+            this.show = true;
             timeline.play();
         },
         getImage(path) {
@@ -123,7 +122,6 @@ export default {
         var self = this;
         this.$nextTick(function () {
             window.setInterval(() => {
-                self.show = true;
                 self.currentPlane.direction = self.directions[self.counter % 2];
                 self.counter += 1;
                 self.animatePlane(self.currentPlane.direction);
@@ -222,5 +220,6 @@ button:hover {
 }
 .plane {
     position: relative;
+    will-change:transform;
 }
 </style>
